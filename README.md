@@ -26,12 +26,95 @@ Vue.use(VueYoutube)
 ```html
 <!-- Include after Vue -->
 <!-- Local files -->
-<link rel="stylesheet" href="vue-youtube/dist/vue-youtube.css"></link>
 <script src="vue-youtube/dist/vue-youtube.js"></script>
 
 <!-- From CDN -->
-<link rel="stylesheet" href="https://unpkg.com/vue-youtube/dist/vue-youtube.css"></link>
 <script src="https://unpkg.com/vue-youtube"></script>
+```
+
+### Example
+
+
+```html
+<youtube :video-id="videoId" ref="player" @playing="playing"></youtube>
+```
+
+```js
+{
+  data() {
+    return {
+      videoId: 'lG0Ys-2d4MA'
+    }
+  },
+  methods: {
+    playing() {
+      console.log('\o/ we are watching!!!')
+    }
+  },
+  computed: {
+    player () => this.$refs.youtube.player
+  },
+  mounted() {
+    this.player.playVideo()
+  }
+}
+```
+
+or 
+
+```html
+<youtube :video-id="videoId" :player-vars="playerVars" @playing="playing"></youtube>
+```
+
+```js
+{
+  data() {
+    return {
+      videoId: 'lG0Ys-2d4MA',
+      playerVars: {
+        autoplay: 1
+      }
+    }
+  },
+  methods: {
+    playing() {
+      console.log('\o/ we are watching!!!')
+    }
+  }
+}
+```
+
+### Events
+
+The component triggers [events](https://developers.google.com/youtube/iframe_api_reference#Events) to notify the parent component of changes in the player. For more information, see [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference#Events).
+
+- ready
+- ended
+- playing
+- paused
+- buffering
+- qued
+- error
+
+### Player
+
+You have access to all [api methods](https://developers.google.com/youtube/iframe_api_reference#Functions) through [component referencing](https://vuejs.org/v2/api/#ref).
+
+Example:
+
+```html
+<youtube video-id="lG0Ys-2d4MA" ref="youtube"></youtube>
+```
+
+```js
+{
+  // ...
+  methods: {
+    playVideo() {
+      this.$refs.youtube.player.playVideo()
+    }
+  }
+}
 ```
 
 ## Development
