@@ -17,8 +17,6 @@ npm install --save vue-youtube
 ```js
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
-// You need a specific loader for CSS files like https://github.com/webpack/css-loader
-import 'vue-youtube/dist/vue-youtube.css'
 
 Vue.use(VueYoutube)
 ```

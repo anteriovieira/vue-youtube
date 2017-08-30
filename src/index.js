@@ -1,14 +1,17 @@
-import Youtube from './components/Youtube.jsx'
+import Youtube from './components/Youtube.js'
 
 function plugin (Vue, options = {}) {
-  Vue.component('Youtube', Youtube)
 
   let tag = document.createElement('script')
   tag.src = 'https://www.youtube.com/iframe_api'
   let firstScriptTag = document.getElementsByTagName('script')[0]
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
+  console.log(tag)
+
   window.onYouTubeIframeAPIReady = function () {
+    //Vue.component('Youtube', Youtube)
+
     Vue.nextTick()
   }
 }
@@ -22,7 +25,6 @@ export default plugin
 const version = '__VERSION__'
 // Export all components too
 export {
-  Hello,
-  HelloJsx,
+  Youtube,
   version
 }
