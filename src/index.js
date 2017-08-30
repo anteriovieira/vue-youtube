@@ -1,19 +1,7 @@
 import Youtube from './components/Youtube.js'
 
 function plugin (Vue, options = {}) {
-
-  let tag = document.createElement('script')
-  tag.src = 'https://www.youtube.com/iframe_api'
-  let firstScriptTag = document.getElementsByTagName('script')[0]
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
-
-  console.log(tag)
-
-  window.onYouTubeIframeAPIReady = function () {
-    //Vue.component('Youtube', Youtube)
-
-    Vue.nextTick()
-  }
+  Vue.component('Youtube', Youtube)
 }
 
 // Install by default if using the script tag

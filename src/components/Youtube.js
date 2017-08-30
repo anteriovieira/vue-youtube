@@ -51,7 +51,7 @@ export default {
       this.$emit('ready', e.target)
     },
     playerStateChange (e) {
-      if (e.data !== state.UNSTARTED) {
+      if (e.data && e.data !== state.UNSTARTED) {
         this.$emit(this.events[this.data], e.target)
       }
     },
