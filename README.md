@@ -155,6 +155,11 @@ git push --follow-tags
 npm publish
 ```
 
+## TODO
+
+- Tests
+- Examples
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
