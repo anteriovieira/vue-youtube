@@ -40,7 +40,7 @@ Vue.use(VueYoutube)
 ```
 
 ```js
-{
+export default {
   data() {
     return {
       videoId: 'lG0Ys-2d4MA'
@@ -67,7 +67,7 @@ or
 ```
 
 ```js
-{
+export default {
   data() {
     return {
       videoId: 'lG0Ys-2d4MA',
@@ -107,7 +107,7 @@ Example:
 ```
 
 ```js
-{
+export default {
   // ...
   methods: {
     playVideo() {
