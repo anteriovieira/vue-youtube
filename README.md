@@ -36,7 +36,7 @@ Vue.use(VueYoutube)
 
 
 ```html
-<youtube :video-id="videoId" ref="player" @playing="playing"></youtube>
+<youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube>
 ```
 
 ```js
