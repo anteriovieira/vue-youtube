@@ -1,6 +1,6 @@
 {
   "name": "vue-youtube",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Vue.js Plugin",
   "author": "Antério Vieira <anteriovieira@gmail.com>>",
   "main": "src/index.js",
