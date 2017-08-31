@@ -37,6 +37,7 @@ Vue.use(VueYoutube)
 
 ```html
 <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube>
+<button @click="playVideo">play</button>
 ```
 
 ```js
@@ -47,15 +48,17 @@ export default {
     }
   },
   methods: {
+    playVideo() {
+      this.player.playVideo()
+    },
     playing() {
       console.log('\o/ we are watching!!!')
     }
   },
   computed: {
-    player () => this.$refs.youtube.player
-  },
-  mounted() {
-    this.player.playVideo()
+    player () {
+      return this.$refs.youtube.player
+    }
   }
 }
 ```
