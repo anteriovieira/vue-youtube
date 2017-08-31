@@ -52,7 +52,7 @@ export default {
     },
     playerStateChange (e) {
       if (e.data !== null && e.data !== state.UNSTARTED) {
-        this.$emit(this.events[this.data], e.target)
+        this.$emit(this.events[e.data], e.target)
       }
     },
     playerError (e) {
@@ -89,9 +89,9 @@ export default {
       playerVars: this.playerVars
     })
 
-    this.player.on('onReady', this.playerReady)
-    this.player.on('onStateChange', this.playerStateChange)
-    this.player.on('onError', this.playerError)
+    this.player.on('ready', this.playerReady)
+    this.player.on('stateChange', this.playerStateChange)
+    this.player.on('error', this.playerError)
   },
   render (h) {
     return h('div', {attrs: { class: 'player-youtube' }}, [
