@@ -28,7 +28,7 @@ export default {
     playerVars: {
       type: Object,
       default: function () {
-        return {autoplay: 0}
+        return { autoplay: 0 }
       }
     }
   },
@@ -57,7 +57,23 @@ export default {
     },
     playerError (e) {
       this.$emit('error', e.target)
+    },
+    updatePlayer (videoId) {
+      if (!videoId) {
+        this.player.stopVideo()
+        return
+      }
+
+      if (this.playerVars.autoplay === 1) {
+        this.player.loadVideoById({ videoId })
+        return
+      }
+
+      this.player.cueVideoById({ videoId })
     }
+  },
+  watch: {
+    videoId: 'updatePlayer'
   },
   beforeDestroy () {
     if (this.player !== null && this.player.destroy) {
