@@ -1,8 +1,7 @@
-# VueYoutube
-
-[![npm](https://img.shields.io/npm/v/vue-youtube.svg)](https://www.npmjs.com/package/vue-youtube) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
-
-> A Vue.js Plugin
+<p aling="center">
+  <img alt="vue-youtube" src="https://raw.githubusercontent.com/anteriovieira/vue-youtube/master/midia/logo.jpg" /> <br />
+  [![npm](https://img.shields.io/npm/v/vue-youtube.svg)](https://www.npmjs.com/package/vue-youtube) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+</p>
 
 ## Installation
 
