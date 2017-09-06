@@ -1,3 +1,10 @@
+<template>
+  <div class="player-youtube">
+    <div class="player-youtube-video" :id="playerId"></div>
+  </div>
+</template>
+
+<script>
 import uniqid from 'uniqid'
 import player from 'youtube-player'
 
@@ -92,10 +99,6 @@ export default {
     this.player.on('ready', this.playerReady)
     this.player.on('stateChange', this.playerStateChange)
     this.player.on('error', this.playerError)
-  },
-  render (h) {
-    return h('div', { attrs: { class: 'player-youtube' }}, [
-      h('div', { attrs: { id: this.playerId, class: 'player-youtube-video' }})
-    ])
   }
 }
+</script>
