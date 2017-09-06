@@ -94,8 +94,8 @@ export default {
     this.player.on('error', this.playerError)
   },
   render (h) {
-    return h('div', {attrs: { class: 'player-youtube' }}, [
-      h('div', {attrs: { id: this.playerId, class: 'player-youtube-video' }})
+    return h('div', { attrs: { class: 'player-youtube' }}, [
+      h('div', { attrs: { id: this.playerId, class: 'player-youtube-video' }})
     ])
   }
 }

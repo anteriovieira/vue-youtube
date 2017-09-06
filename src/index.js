@@ -1,6 +1,6 @@
 import Youtube from './components/Youtube.js'
 
-function plugin (Vue, options = {}) {
+function plugin (Vue) {
   Vue.component('Youtube', Youtube)
 }
 
