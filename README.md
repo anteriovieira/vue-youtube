@@ -128,7 +128,7 @@ export default {
 
 Usage:
 
-```
+```js
 ...
   methods: {
     getId () {
