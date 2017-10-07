@@ -8,7 +8,7 @@ const BUFFERING = 3
 const CUED = 5
 
 export default {
-  name: 'vue-youtube',
+  name: 'Youtube',
   props: {
     height: {
       type: [Number, String],

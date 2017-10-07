@@ -1,8 +1,67 @@
 /*!
- * vue-youtube v1.1.3
+ * vue-youtube v1.1.4
  * (c) 2017 Antério Vieira
  * Released under the MIT License.
  */
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var getYoutubeId = createCommonjsModule(function (module, exports) {
+(function (root, factory) {
+  {
+    module.exports = factory();
+  }
+}(commonjsGlobal, function (exports) {
+
+  return function (url, opts) {
+    if (opts == undefined) {
+      opts = {fuzzy: true};
+    }
+
+    if (/youtu\.?be/.test(url)) {
+
+      // Look first for known patterns
+      var i;
+      var patterns = [
+        /youtu\.be\/([^#\&\?]{11})/,  // youtu.be/<id>
+        /\?v=([^#\&\?]{11})/,         // ?v=<id>
+        /\&v=([^#\&\?]{11})/,         // &v=<id>
+        /embed\/([^#\&\?]{11})/,      // embed/<id>
+        /\/v\/([^#\&\?]{11})/         // /v/<id>
+      ];
+
+      // If any pattern matches, return the ID
+      for (i = 0; i < patterns.length; ++i) {
+        if (patterns[i].test(url)) {
+          return patterns[i].exec(url)[1];
+        }
+      }
+
+      if (opts.fuzzy) {
+        // If that fails, break it apart by certain characters and look
+        // for the 11 character key
+        var tokens = url.split(/[\/\&\?=#\.\s]/g);
+        for (i = 0; i < tokens.length; ++i) {
+          if (/^[^#\&\?]{11}$/.test(tokens[i])) {
+            return tokens[i];
+          }
+        }
+      }
+    }
+
+    return null;
+  };
+
+}));
+});
 
 var player = require('youtube-player');
 
@@ -14,7 +73,7 @@ var BUFFERING = 3;
 var CUED = 5;
 
 var Youtube = {
-  name: 'vue-youtube',
+  name: 'Youtube',
   props: {
     height: {
       type: [Number, String],
@@ -99,6 +158,10 @@ var Youtube = {
 };
 
 function plugin (Vue) {
+  Vue.prototype.$youtube = {
+    getIdFromUrl: getYoutubeId
+  };
+
   Vue.component('youtube', Youtube);
 }
 
@@ -106,6 +169,6 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '1.1.3';
+var version = '1.1.4';
 
 export { Youtube, version };export default plugin;

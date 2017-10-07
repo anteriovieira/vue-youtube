@@ -136,6 +136,7 @@
     "url": "http://www.opensource.org/licenses/mit-license.php"
   },
   "dependencies": {
+    "get-youtube-id": "^1.0.0",
     "youtube-player": "^5.4.0"
   }
 }
