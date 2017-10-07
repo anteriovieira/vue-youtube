@@ -140,7 +140,7 @@ Usage:
 
 | Method       | Description       |
 |--------------|-------------------|
-| getIdFromUrl | Get id from url   |
+| getIdFromUrl(url: String) | Get id from url ([get-youtube-id](https://github.com/jmorrell/get-youtube-id])) |
 
 ## License
 
