@@ -1,13 +1,11 @@
 const player = require('youtube-player')
 
-const {
-  UNSTARTED,
-  ENDED,
-  PLAYING,
-  PAUSED,
-  BUFFERING,
-  CUED
-} = require('./player-state')
+const UNSTARTED = -1
+const ENDED = 0
+const PLAYING = 1
+const PAUSED = 2
+const BUFFERING = 3
+const CUED = 5
 
 export default {
   name: 'vue-youtube',
