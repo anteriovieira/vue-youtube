@@ -4,14 +4,8 @@ function plugin (Vue) {
   Vue.component('vue-youtube', VueYoutube)
 }
 
-if (typeof window !== 'undefined') {
-  window.YTConfig = {
-    host: 'https://www.youtube.com'
-  }
-
-  if (window.Vue) {
-    window.Vue.use(plugin)
-  }
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin)
 }
 
 export default plugin
