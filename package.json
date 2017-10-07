@@ -1,6 +1,6 @@
 {
   "name": "vue-youtube",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "description": "A Vue.js Plugin",
   "author": "Antério Vieira",
   "main": "dist/vue-youtube.common.js",
