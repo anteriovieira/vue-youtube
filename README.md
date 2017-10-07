@@ -37,7 +37,6 @@ Vue.use(VueYoutube)
 <script src="vue-youtube/dist/vue-youtube.js"></script>
 
 <!-- From CDN -->
-<link rel="stylesheet" 
 <script src="https://unpkg.com/vue-youtube"></script>
 ```
 
