@@ -124,6 +124,24 @@ export default {
 }
 ```
 
+## API
+
+Usage:
+
+```
+...
+  methods: {
+    getId () {
+      return this.$youtube.getIdFromUrl(this.video.url)
+    }
+  }
+...
+```
+
+| Method       | Description       |
+|--------------|-------------------|
+| getIdFromUrl | Get id from url   |
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
