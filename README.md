@@ -126,8 +126,16 @@ export default {
 
 ## API
 
-Usage:
+### vm.$youtube.getIdFromUrl
 
+> New in v1.2.0
+
+- **Type:** `Function`
+- **Description:** Parse a youtube url returning the video ID. ([get-youtube-id](https://github.com/jmorrell/get-youtube-id]))
+- **Arguments:**
+  - `{String} url`
+  - `{Object} options`
+- **Usage:**
 ```js
 ...
   methods: {
@@ -137,10 +145,6 @@ Usage:
   }
 ...
 ```
-
-| Method       | Description       |
-|--------------|-------------------|
-| getIdFromUrl(url: String) | Get id from url ([get-youtube-id](https://github.com/jmorrell/get-youtube-id])) |
 
 ## License
 
