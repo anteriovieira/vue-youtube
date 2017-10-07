@@ -35,9 +35,6 @@ Vue.use(VueYoutube)
 <!-- Include after Vue -->
 <!-- Local files -->
 <script src="vue-youtube/dist/vue-youtube.js"></script>
-
-<!-- From CDN -->
-<script src="https://unpkg.com/vue-youtube"></script>
 ```
 
 ### Example
