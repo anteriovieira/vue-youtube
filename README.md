@@ -91,6 +91,8 @@ export default {
 }
 ```
 
+[Live demo](http://vue-youtube.herokuapp.com/)
+
 ### Events
 
 The component triggers [events](https://developers.google.com/youtube/iframe_api_reference#Events) to notify the parent component of changes in the player. For more information, see [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference#Events).
