@@ -8,7 +8,28 @@
 
 ## Intro
 
-A simple component for a powerful API. [vue-youtube](https://www.npmjs.com/package/vue-youtube) provides a simple layer for you to use your imagination while over the [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference).
+[vue-youtube](https://www.npmjs.com/package/vue-youtube) is an wrapper of [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) (YIPA).
+
+__What is the difference between other plugins?__ The difference is that the function body is wrapped in a promise. This promise is resolved only when the player has finished loading and is ready to begin receiving API calls (onReady). Therefore, all function calls are queued and replayed only when player is ready.
+
+You can do something like:
+
+```js
+export default {
+  // ...
+  computed: {
+    player () {
+      return this.$refs.youtube.player
+    }
+  },
+  methods: {
+    async playVideo() {
+      await this.player.playVideo()
+      // Do something after the playVideo command
+    }
+  }
+}
+```
 
 ## Installation
 
