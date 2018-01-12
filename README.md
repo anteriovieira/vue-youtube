@@ -31,6 +31,8 @@ export default {
 }
 ```
 
+[Live demo](https://codesandbox.io/s/oll3o58xvy) built on top of the awesome [codesandbox](https://codesandbox.io).
+
 ## Installation
 
 ```bash
