@@ -1,5 +1,5 @@
 /*!
- * vue-youtube v1.2.3
+ * vue-youtube v1.2.4
  * (c) 2018 Antério Vieira
  * Released under the MIT License.
  */
@@ -84,9 +84,7 @@ var Youtube = {
     videoId: String,
     playerVars: {
       type: Object,
-      default: function () {
-        return { autoplay: 0 }
-      }
+      default: function () { return ({}); }
     },
     height: {
       type: [Number, String],
@@ -95,7 +93,7 @@ var Youtube = {
     width: {
       type: [Number, String],
       default: 640
-    },
+    }
   },
   data: function data () {
     return {
@@ -172,7 +170,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '1.2.3';
+var version = '1.2.4';
 
 exports['default'] = plugin;
 exports.Youtube = Youtube;
