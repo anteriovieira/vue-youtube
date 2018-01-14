@@ -13,9 +13,7 @@ export default {
     videoId: String,
     playerVars: {
       type: Object,
-      default: function () {
-        return { autoplay: 0 }
-      }
+      default: () => ({})
     },
     height: {
       type: [Number, String],
