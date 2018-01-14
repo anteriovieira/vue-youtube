@@ -22,7 +22,7 @@ export default {
     width: {
       type: [Number, String],
       default: 640
-    },
+    }
   },
   data () {
     return {
