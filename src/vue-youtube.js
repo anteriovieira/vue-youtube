@@ -10,6 +10,13 @@ const CUED = 5
 export default {
   name: 'Youtube',
   props: {
+    videoId: String,
+    playerVars: {
+      type: Object,
+      default: function () {
+        return { autoplay: 0 }
+      }
+    },
     height: {
       type: [Number, String],
       default: 360
@@ -18,16 +25,6 @@ export default {
       type: [Number, String],
       default: 640
     },
-    videoId: {
-      type: String,
-      required: true
-    },
-    playerVars: {
-      type: Object,
-      default: function () {
-        return { autoplay: 0 }
-      }
-    }
   },
   data () {
     return {
