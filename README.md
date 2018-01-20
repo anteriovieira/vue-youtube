@@ -125,7 +125,7 @@ The component triggers [events](https://developers.google.com/youtube/iframe_api
 - playing
 - paused
 - buffering
-- qued
+- cued
 - error
 
 ### Player
