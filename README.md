@@ -156,7 +156,7 @@ export default {
 > New in v1.2.0
 
 - **Type:** `Function`
-- **Description:** Parse a youtube url returning the video ID. ([get-youtube-id](https://github.com/jmorrell/get-youtube-id]))
+- **Description:** Parse a youtube url returning the video ID. ([get-youtube-id](https://github.com/jmorrell/get-youtube-id))
 - **Arguments:**
   - `{String} url`
   - `{Object} options`
