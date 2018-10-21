@@ -22,6 +22,14 @@ export default {
     width: {
       type: [Number, String],
       default: 640
+    },
+    resize: {
+      type: Boolean,
+      default: true
+    },
+    resizeDelay: {
+      type: Number,
+      default: 300
     }
   },
   data () {
@@ -34,7 +42,8 @@ export default {
         [ENDED]: 'ended',
         [BUFFERING]: 'buffering',
         [CUED]: 'cued'
-      }
+      },
+      aspectRatio: null
     }
   },
   methods: {
@@ -77,6 +86,8 @@ export default {
       host: 'https://www.youtube.com'
     }
 
+    this.aspectRatio = this.width / this.height
+
     this.player = player(this.$el, {
       width: this.width,
       height: this.height,
@@ -87,6 +98,21 @@ export default {
     this.player.on('ready', this.playerReady)
     this.player.on('stateChange', this.playerStateChange)
     this.player.on('error', this.playerError)
+
+    let timeout = false
+
+    if (this.resize) {
+      window.addEventListener('resize', () => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          this.player.getIframe().then(iframe => {
+            const width = iframe.parentElement.offsetWidth
+            const height = width / this.aspectRatio
+            this.player.setSize(width, height)
+          })
+        }, this.reiszeDelay)
+      })
+    }
   },
   render (h) {
     return h('div')

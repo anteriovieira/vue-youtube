@@ -91,12 +91,21 @@ var Youtube = {
     width: {
       type: [Number, String],
       default: 640
+    },
+    resize: {
+      type: Boolean,
+      default: true
+    },
+    resizeDelay: {
+      type: Number,
+      default: 300
     }
   },
   data: function data () {
     return {
       player: {},
-      events: ( obj = {}, obj[UNSTARTED] = 'unstarted', obj[PLAYING] = 'playing', obj[PAUSED] = 'paused', obj[ENDED] = 'ended', obj[BUFFERING] = 'buffering', obj[CUED] = 'cued', obj )
+      events: ( obj = {}, obj[UNSTARTED] = 'unstarted', obj[PLAYING] = 'playing', obj[PAUSED] = 'paused', obj[ENDED] = 'ended', obj[BUFFERING] = 'buffering', obj[CUED] = 'cued', obj ),
+      aspectRatio: null
     }
     var obj;
   },
@@ -136,9 +145,13 @@ var Youtube = {
     }
   },
   mounted: function mounted () {
+    var this$1 = this;
+
     window.YTConfig = {
       host: 'https://www.youtube.com'
     };
+
+    this.aspectRatio = this.width / this.height;
 
     this.player = player(this.$el, {
       width: this.width,
@@ -150,6 +163,21 @@ var Youtube = {
     this.player.on('ready', this.playerReady);
     this.player.on('stateChange', this.playerStateChange);
     this.player.on('error', this.playerError);
+
+    var timeout = false;
+
+    if (this.resize) {
+      window.addEventListener('resize', function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          this$1.player.getIframe().then(function (iframe) {
+            var width = iframe.parentElement.offsetWidth;
+            var height = width / this$1.aspectRatio;
+            this$1.player.setSize(width, height);
+          });
+        }, this$1.reiszeDelay);
+      });
+    }
   },
   render: function render (h) {
     return h('div')
