@@ -92,7 +92,14 @@ export default {
     }
   },
   watch: {
-    videoId: 'updatePlayer'
+    videoId: 'updatePlayer',
+    resize: function (val) {
+      if (val) {
+        window.addEventListener('resize', this.onResize)
+      } else {
+        window.removeEventListener('resize', this.onResize)
+      }
+    }
   },
   beforeDestroy () {
     if (this.player !== null && this.player.destroy) {
