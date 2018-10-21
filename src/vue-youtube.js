@@ -42,7 +42,8 @@ export default {
         [ENDED]: 'ended',
         [BUFFERING]: 'buffering',
         [CUED]: 'cued'
-      }
+      },
+      resizeTimeout: null
     }
   },
   computed: {
@@ -74,6 +75,20 @@ export default {
       }
 
       this.player.cueVideoById({ videoId })
+    },
+    resizeProportionally () {
+      this.player.getIframe().then(iframe => {
+        const width = iframe.parentElement.offsetWidth
+        const height = width / this.aspectRatio
+        this.player.setSize(width, height)
+      })
+    },
+    onResize () {
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(
+        this.resizeProportionally,
+        this.reiszeDelay
+      )
     }
   },
   watch: {
@@ -101,19 +116,8 @@ export default {
     this.player.on('stateChange', this.playerStateChange)
     this.player.on('error', this.playerError)
 
-    let timeout = false
-
     if (this.resize) {
-      window.addEventListener('resize', () => {
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-          this.player.getIframe().then(iframe => {
-            const width = iframe.parentElement.offsetWidth
-            const height = width / this.aspectRatio
-            this.player.setSize(width, height)
-          })
-        }, this.reiszeDelay)
-      })
+      window.addEventListener('resize', this.onResize)
     }
   },
   render (h) {
