@@ -42,8 +42,12 @@ export default {
         [ENDED]: 'ended',
         [BUFFERING]: 'buffering',
         [CUED]: 'cued'
-      },
-      aspectRatio: null
+      }
+    }
+  },
+  computed: {
+    aspectRatio () {
+      return this.width / this.height
     }
   },
   methods: {
@@ -85,8 +89,6 @@ export default {
     window.YTConfig = {
       host: 'https://www.youtube.com'
     }
-
-    this.aspectRatio = this.width / this.height
 
     this.player = player(this.$el, {
       width: this.width,
