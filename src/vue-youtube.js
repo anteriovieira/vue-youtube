@@ -30,6 +30,10 @@ export default {
     resizeDelay: {
       type: Number,
       default: 300
+    },
+    fitParent: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -78,7 +82,9 @@ export default {
     },
     resizeProportionally () {
       this.player.getIframe().then(iframe => {
-        const width = iframe.parentElement.offsetWidth
+        const width = this.fitParent
+          ? iframe.parentElement.offsetWidth
+          : iframe.offsetWidth
         const height = width / this.aspectRatio
         this.player.setSize(width, height)
       })

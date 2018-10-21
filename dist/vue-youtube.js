@@ -101,15 +101,24 @@ var Youtube = {
     resizeDelay: {
       type: Number,
       default: 300
+    },
+    fitParent: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data () {
     return {
       player: {},
       events: ( obj = {}, obj[UNSTARTED] = 'unstarted', obj[PLAYING] = 'playing', obj[PAUSED] = 'paused', obj[ENDED] = 'ended', obj[BUFFERING] = 'buffering', obj[CUED] = 'cued', obj ),
-      aspectRatio: null
+      resizeTimeout: null
     }
     var obj;
+  },
+  computed: {
+    aspectRatio: function aspectRatio () {
+      return this.width / this.height
+    }
   },
   methods: {
     playerReady: function playerReady (e) {
@@ -135,10 +144,35 @@ var Youtube = {
       }
 
       this.player.cueVideoById({ videoId: videoId });
+    },
+    resizeProportionally: function resizeProportionally () {
+      var this$1 = this;
+
+      this.player.getIframe().then(function (iframe) {
+        var width = this$1.fitParent
+          ? iframe.parentElement.offsetWidth
+          : iframe.offsetWidth;
+        var height = width / this$1.aspectRatio;
+        this$1.player.setSize(width, height);
+      });
+    },
+    onResize: function onResize () {
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(
+        this.resizeProportionally,
+        this.reiszeDelay
+      );
     }
   },
   watch: {
-    videoId: 'updatePlayer'
+    videoId: 'updatePlayer',
+    resize: function (val) {
+      if (val) {
+        window.addEventListener('resize', this.onResize);
+      } else {
+        window.removeEventListener('resize', this.onResize);
+      }
+    }
   },
   beforeDestroy: function beforeDestroy () {
     if (this.player !== null && this.player.destroy) {
@@ -147,13 +181,9 @@ var Youtube = {
     }
   },
   mounted: function mounted () {
-    var this$1 = this;
-
     window.YTConfig = {
       host: 'https://www.youtube.com'
     };
-
-    this.aspectRatio = this.width / this.height;
 
     this.player = player(this.$el, {
       width: this.width,
@@ -166,19 +196,8 @@ var Youtube = {
     this.player.on('stateChange', this.playerStateChange);
     this.player.on('error', this.playerError);
 
-    var timeout = false;
-
     if (this.resize) {
-      window.addEventListener('resize', function () {
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-          this$1.player.getIframe().then(function (iframe) {
-            var width = iframe.parentElement.offsetWidth;
-            var height = width / this$1.aspectRatio;
-            this$1.player.setSize(width, height);
-          });
-        }, this$1.reiszeDelay);
-      });
+      window.addEventListener('resize', this.onResize);
     }
   },
   render: function render (h) {
