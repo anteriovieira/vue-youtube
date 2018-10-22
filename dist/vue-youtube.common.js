@@ -94,15 +94,15 @@ var Youtube = {
     },
     resize: {
       type: Boolean,
-      default: true
+      default: false
     },
     resizeDelay: {
       type: Number,
-      default: 300
+      default: 100
     },
     fitParent: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data: function data () {
@@ -158,7 +158,7 @@ var Youtube = {
       clearTimeout(this.resizeTimeout);
       this.resizeTimeout = setTimeout(
         this.resizeProportionally,
-        this.reiszeDelay
+        this.resizeDelay
       );
     }
   },
@@ -167,8 +167,10 @@ var Youtube = {
     resize: function (val) {
       if (val) {
         window.addEventListener('resize', this.onResize);
+        this.resizeProportionally();
       } else {
         window.removeEventListener('resize', this.onResize);
+        this.player.setSize(this.width, this.height);
       }
     }
   },
@@ -196,6 +198,10 @@ var Youtube = {
 
     if (this.resize) {
       window.addEventListener('resize', this.onResize);
+    }
+
+    if (this.fitParent) {
+      this.resizeProportionally();
     }
   },
   render: function render (h) {
