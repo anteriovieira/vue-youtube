@@ -25,15 +25,15 @@ export default {
     },
     resize: {
       type: Boolean,
-      default: true
+      default: false
     },
     resizeDelay: {
       type: Number,
-      default: 300
+      default: 100
     },
     fitParent: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data () {
@@ -93,7 +93,7 @@ export default {
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(
         this.resizeProportionally,
-        this.reiszeDelay
+        this.resizeDelay
       )
     }
   },
@@ -102,8 +102,10 @@ export default {
     resize: function (val) {
       if (val) {
         window.addEventListener('resize', this.onResize)
+        this.resizeProportionally()
       } else {
         window.removeEventListener('resize', this.onResize)
+        this.player.setSize(this.width, this.height)
       }
     }
   },
@@ -131,6 +133,10 @@ export default {
 
     if (this.resize) {
       window.addEventListener('resize', this.onResize)
+    }
+
+    if (this.fitParent) {
+      this.resizeProportionally()
     }
   },
   render (h) {
