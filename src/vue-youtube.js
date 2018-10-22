@@ -22,6 +22,18 @@ export default {
     width: {
       type: [Number, String],
       default: 640
+    },
+    resize: {
+      type: Boolean,
+      default: false
+    },
+    resizeDelay: {
+      type: Number,
+      default: 100
+    },
+    fitParent: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -34,7 +46,13 @@ export default {
         [ENDED]: 'ended',
         [BUFFERING]: 'buffering',
         [CUED]: 'cued'
-      }
+      },
+      resizeTimeout: null
+    }
+  },
+  computed: {
+    aspectRatio () {
+      return this.width / this.height
     }
   },
   methods: {
@@ -61,10 +79,35 @@ export default {
       }
 
       this.player.cueVideoById({ videoId })
+    },
+    resizeProportionally () {
+      this.player.getIframe().then(iframe => {
+        const width = this.fitParent
+          ? iframe.parentElement.offsetWidth
+          : iframe.offsetWidth
+        const height = width / this.aspectRatio
+        this.player.setSize(width, height)
+      })
+    },
+    onResize () {
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(
+        this.resizeProportionally,
+        this.resizeDelay
+      )
     }
   },
   watch: {
-    videoId: 'updatePlayer'
+    videoId: 'updatePlayer',
+    resize: function (val) {
+      if (val) {
+        window.addEventListener('resize', this.onResize)
+        this.resizeProportionally()
+      } else {
+        window.removeEventListener('resize', this.onResize)
+        this.player.setSize(this.width, this.height)
+      }
+    }
   },
   beforeDestroy () {
     if (this.player !== null && this.player.destroy) {
@@ -87,6 +130,14 @@ export default {
     this.player.on('ready', this.playerReady)
     this.player.on('stateChange', this.playerStateChange)
     this.player.on('error', this.playerError)
+
+    if (this.resize) {
+      window.addEventListener('resize', this.onResize)
+    }
+
+    if (this.fitParent) {
+      this.resizeProportionally()
+    }
   },
   render (h) {
     return h('div')

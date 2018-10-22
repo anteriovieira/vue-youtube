@@ -1,17 +1,17 @@
-
 <p align="center">
   <img alt="vue-youtube" src="https://raw.githubusercontent.com/anteriovieira/vue-youtube/master/media/logo.png" /> <br />
   <h1 align="center">VueYoutube</h1>
 
 <a href="https://www.npmjs.com/package/vue-youtube"><img src="https://camo.githubusercontent.com/404a8346e5a003dd53c51896015852e3093e10ce/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f7675652d796f75747562652e737667" alt="npm" data-canonical-src="https://img.shields.io/npm/v/vue-youtube.svg" style="max-width:100%;"></a> <a href="https://vuejs.org/"><img src="https://camo.githubusercontent.com/0c34e7fdf42ec7923543c5624d6b818af7377aa2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7675652d322e782d627269676874677265656e2e737667" alt="vue2" data-canonical-src="https://img.shields.io/badge/vue-2.x-brightgreen.svg" style="max-width:100%;"></a>
 <a href="https://www.npmjs.com/package/vue-youtube"><img src="https://img.shields.io/github/downloads/atom/atom/total.svg" alt="Downloads"></a> <a href="https://www.npmjs.com/package/vue-youtube"><img src="https://camo.githubusercontent.com/9a140a4c68e7c178bc660bee7675f4f25ff7ade3/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f7675652e737667" alt="License" data-canonical-src="https://img.shields.io/npm/l/vue-youtube.svg" style="max-width:100%;"></a>
+
 </p>
 
 ## Intro
 
 [vue-youtube](https://www.npmjs.com/package/vue-youtube) is an wrapper of [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) (YIPA).
 
-__What is the difference between other plugins?__ The difference is that the function body is wrapped in a promise. This promise is resolved only when the player has finished loading and is ready to begin receiving API calls (onReady). Therefore, all function calls are queued and replayed only when player is ready.
+**What is the difference between other plugins?** The difference is that the function body is wrapped in a promise. This promise is resolved only when the player has finished loading and is ready to begin receiving API calls (onReady). Therefore, all function calls are queued and replayed only when player is ready.
 
 You can do something like:
 
@@ -19,7 +19,7 @@ You can do something like:
 export default {
   // ...
   computed: {
-    player () {
+    player() {
       return this.$refs.youtube.player
     }
   },
@@ -63,7 +63,6 @@ Vue.use(VueYoutube)
 
 ### Example
 
-
 ```html
 <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube>
 <button @click="playVideo">play</button>
@@ -85,13 +84,14 @@ export default {
     }
   },
   computed: {
-    player () {
+    player() {
       return this.$refs.youtube.player
     }
   }
 }
 ```
-or 
+
+or
 
 ```html
 <youtube :video-id="videoId" :player-vars="playerVars" @playing="playing"></youtube>
@@ -121,15 +121,15 @@ export default {
 
 The component triggers [events](https://developers.google.com/youtube/iframe_api_reference#Events) to notify the parent component of changes in the player. For more information, see [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference#Events).
 
-Event     |
-----------|
-ready     |
-ended     |
-playing   |
-paused    |
-buffering |
-cued      |
-error     |
+| Event     |
+| --------- |
+| ready     |
+| ended     |
+| playing   |
+| paused    |
+| buffering |
+| cued      |
+| error     |
 
 ### Player
 
@@ -152,6 +152,27 @@ export default {
 }
 ```
 
+### Props
+
+| Prop        | Type(s)        | Default | Description                                              |
+| ----------- | -------------- | ------- | -------------------------------------------------------- |
+| width       | Number, String | 640     | `iframe` pixel width                                     |
+| height      | Number, String | 360     | `iframe` pixel height                                    |
+| resize      | Boolean        | false   | `iframe` will proportionally scale height with its width |
+| resizeDelay | Number         | 200     | Delay in milliseconds before running resize callback     |
+| fitParent   | Number         | true    | `iframe` will use its parent's width                     |
+
+#### Tips for Resizing
+
+Resizing proportionally (`resize`) works best with a parent element. The parent element is used for a width reference. `fitParent` should be on in most situations. It allows `resize` to work without appyling CSS any properties to your `iframe`. If you want to turn `fitParent` off, you can emulate it with CSS by setting `width` to `100%`, like so:
+
+```css
+iframe {
+  width: 100%;
+  max-width: 650px; /* Also helpful. Optional. */
+}
+```
+
 ## API
 
 ### vm.$youtube.getIdFromUrl
@@ -164,6 +185,7 @@ export default {
   - `{String} url`
   - `{Object} options`
 - **Usage:**
+
 ```js
 ...
   methods: {
