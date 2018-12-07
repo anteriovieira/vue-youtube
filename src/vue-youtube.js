@@ -109,10 +109,10 @@ export default {
       }
     },
     width (val) {
-      this.player.setSize(val, this.height);
+      this.player.setSize(val, this.height)
     },
     height (val) {
-      this.player.setSize(this.width, val);
+      this.player.setSize(this.width, val)
     }
   },
   beforeDestroy () {
