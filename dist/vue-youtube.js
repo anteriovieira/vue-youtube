@@ -1,5 +1,5 @@
 /*!
- * vue-youtube v1.2.5
+ * vue-youtube v1.3.1
  * (c) 2018 Antério Vieira
  * Released under the MIT License.
  */
@@ -93,14 +93,32 @@ var Youtube = {
     width: {
       type: [Number, String],
       default: 640
+    },
+    resize: {
+      type: Boolean,
+      default: false
+    },
+    resizeDelay: {
+      type: Number,
+      default: 100
+    },
+    fitParent: {
+      type: Boolean,
+      default: true
     }
   },
   data: function data () {
     return {
       player: {},
-      events: ( obj = {}, obj[UNSTARTED] = 'unstarted', obj[PLAYING] = 'playing', obj[PAUSED] = 'paused', obj[ENDED] = 'ended', obj[BUFFERING] = 'buffering', obj[CUED] = 'cued', obj )
+      events: ( obj = {}, obj[UNSTARTED] = 'unstarted', obj[PLAYING] = 'playing', obj[PAUSED] = 'paused', obj[ENDED] = 'ended', obj[BUFFERING] = 'buffering', obj[CUED] = 'cued', obj ),
+      resizeTimeout: null
     }
     var obj;
+  },
+  computed: {
+    aspectRatio: function aspectRatio () {
+      return this.width / this.height
+    }
   },
   methods: {
     playerReady: function playerReady (e) {
@@ -126,10 +144,43 @@ var Youtube = {
       }
 
       this.player.cueVideoById({ videoId: videoId });
+    },
+    resizeProportionally: function resizeProportionally () {
+      var this$1 = this;
+
+      this.player.getIframe().then(function (iframe) {
+        var width = this$1.fitParent
+          ? iframe.parentElement.offsetWidth
+          : iframe.offsetWidth;
+        var height = width / this$1.aspectRatio;
+        this$1.player.setSize(width, height);
+      });
+    },
+    onResize: function onResize () {
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(
+        this.resizeProportionally,
+        this.resizeDelay
+      );
     }
   },
   watch: {
-    videoId: 'updatePlayer'
+    videoId: 'updatePlayer',
+    resize: function resize (val) {
+      if (val) {
+        window.addEventListener('resize', this.onResize);
+        this.resizeProportionally();
+      } else {
+        window.removeEventListener('resize', this.onResize);
+        this.player.setSize(this.width, this.height);
+      }
+    },
+    width: function width (val) {
+      this.player.setSize(val, this.height);
+    },
+    height: function height (val) {
+      this.player.setSize(this.width, val);
+    }
   },
   beforeDestroy: function beforeDestroy () {
     if (this.player !== null && this.player.destroy) {
@@ -152,6 +203,14 @@ var Youtube = {
     this.player.on('ready', this.playerReady);
     this.player.on('stateChange', this.playerStateChange);
     this.player.on('error', this.playerError);
+
+    if (this.resize) {
+      window.addEventListener('resize', this.onResize);
+    }
+
+    if (this.fitParent) {
+      this.resizeProportionally();
+    }
   },
   render: function render (h) {
     return h('div')
@@ -170,7 +229,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '1.2.5';
+var version = '1.3.1';
 
 exports['default'] = plugin;
 exports.Youtube = Youtube;
