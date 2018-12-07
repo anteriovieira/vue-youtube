@@ -99,7 +99,7 @@ export default {
   },
   watch: {
     videoId: 'updatePlayer',
-    resize: function (val) {
+    resize (val) {
       if (val) {
         window.addEventListener('resize', this.onResize)
         this.resizeProportionally()
@@ -107,6 +107,12 @@ export default {
         window.removeEventListener('resize', this.onResize)
         this.player.setSize(this.width, this.height)
       }
+    },
+    width (val) {
+      this.player.setSize(val, this.height);
+    },
+    height (val) {
+      this.player.setSize(this.width, val);
     }
   },
   beforeDestroy () {
