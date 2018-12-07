@@ -33,7 +33,7 @@ export default {
     },
     fitParent: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data () {

@@ -1,5 +1,5 @@
 /*!
- * vue-youtube v1.3.1
+ * vue-youtube v1.3.3
  * (c) 2018 Antério Vieira
  * Released under the MIT License.
  */
@@ -98,7 +98,7 @@ var Youtube = {
     },
     fitParent: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data: function data () {
@@ -223,6 +223,6 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '1.3.1';
+var version = '1.3.3';
 
 export { Youtube, version };export default plugin;
