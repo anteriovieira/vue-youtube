@@ -160,7 +160,7 @@ export default {
 | height      | Number, String | 360     | `iframe` pixel height                                    |
 | resize      | Boolean        | false   | `iframe` will proportionally scale height with its width |
 | resizeDelay | Number         | 200     | Delay in milliseconds before running resize callback     |
-| fitParent   | Number         | false    | `iframe` will use its parent's width                     |
+| fitParent   | Boolean        | false   | `iframe` will use its parent's width                     |
 
 #### Tips for Resizing
 
