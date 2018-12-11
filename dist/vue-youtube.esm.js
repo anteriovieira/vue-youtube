@@ -181,6 +181,10 @@ var Youtube = {
       this.player.destroy();
       delete this.player;
     }
+
+    if (this.resize) {
+      window.removeEventListener('resize', this.onResize);
+    }
   },
   mounted: function mounted () {
     window.YTConfig = {
