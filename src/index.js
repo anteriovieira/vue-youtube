@@ -1,9 +1,9 @@
-import GetYoutubeId from 'get-youtube-id'
+import getIdFromUrl from 'get-youtube-id'
 import Youtube from './vue-youtube'
 
 function plugin (Vue) {
   Vue.prototype.$youtube = {
-    getIdFromUrl: GetYoutubeId
+    getIdFromUrl
   }
 
   Vue.component('youtube', Youtube)
@@ -18,5 +18,6 @@ const version = '__VERSION__'
 
 export {
   Youtube,
+  getIdFromUrl,
   version
 }
