@@ -121,15 +121,15 @@ export default {
 
 The component triggers [events](https://developers.google.com/youtube/iframe_api_reference#Events) to notify the parent component of changes in the player. For more information, see [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference#Events).
 
-| Event     |
-| --------- |
-| ready     |
-| ended     |
-| playing   |
-| paused    |
-| buffering |
-| cued      |
-| error     |
+| Events => | ready     | ended     | playing   | paused    | buffering | cued      | error     |
+| --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
+
+
+
+
+
+
+
 
 ### Player
 
