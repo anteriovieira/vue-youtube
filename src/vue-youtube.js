@@ -127,7 +127,7 @@ export default {
   },
   mounted () {
     window.YTConfig = {
-      host: 'https://www.youtube.com'
+      host: 'https://www.youtube.com/iframe_api'
     }
 
     this.player = player(this.$el, {
