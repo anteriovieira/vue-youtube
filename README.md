@@ -195,7 +195,15 @@ iframe {
   }
 ...
 ```
+or
+```js
+import { getIdFromUrl } from 'vue-youtube'
 
+const myFunction = (url) => {
+  const youtubeId = getIdFromUrl(url)
+  // ...
+}
+```
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
