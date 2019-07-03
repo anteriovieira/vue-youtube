@@ -1,5 +1,5 @@
 /*!
- * vue-youtube v1.3.4
+ * vue-youtube v1.3.5
  * (c) 2019 Antério Vieira
  * Released under the MIT License.
  */
@@ -233,10 +233,11 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '1.3.4';
+var version = '1.3.5';
 
 exports['default'] = plugin;
 exports.Youtube = Youtube;
+exports.getIdFromUrl = getYoutubeId;
 exports.version = version;
 
 Object.defineProperty(exports, '__esModule', { value: true });
