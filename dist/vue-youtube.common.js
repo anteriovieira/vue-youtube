@@ -1,5 +1,5 @@
 /*!
- * vue-youtube v1.3.5
+ * vue-youtube v1.4.0
  * (c) 2019 Antério Vieira
  * Released under the MIT License.
  */
@@ -100,6 +100,10 @@ var Youtube = {
       type: Number,
       default: 100
     },
+    nocookie: {
+      type: Boolean,
+      default: false
+    },
     fitParent: {
       type: Boolean,
       default: false
@@ -195,7 +199,10 @@ var Youtube = {
       host: 'https://www.youtube.com/iframe_api'
     };
 
+    var host = this.nocookie ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
+
     this.player = player(this.$el, {
+      host: host,
       width: this.width,
       height: this.height,
       videoId: this.videoId,
@@ -231,7 +238,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '1.3.5';
+var version = '1.4.0';
 
 exports['default'] = plugin;
 exports.Youtube = Youtube;
