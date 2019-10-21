@@ -31,6 +31,10 @@ export default {
       type: Number,
       default: 100
     },
+    nocookie: {
+      type: Boolean,
+      default: false
+    },
     fitParent: {
       type: Boolean,
       default: false
@@ -129,8 +133,11 @@ export default {
     window.YTConfig = {
       host: 'https://www.youtube.com/iframe_api'
     }
+    
+    const host = this.nocookie ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com'
 
     this.player = player(this.$el, {
+      host,
       width: this.width,
       height: this.height,
       videoId: this.videoId,
