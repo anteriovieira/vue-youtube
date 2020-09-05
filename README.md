@@ -161,6 +161,7 @@ export default {
 | resize      | Boolean        | false   | `iframe` will proportionally scale height with its width |
 | resizeDelay | Number         | 200     | Delay in milliseconds before running resize callback     |
 | fitParent   | Boolean        | false   | `iframe` will use its parent's width                     |
+| nocookie    | Boolean        | false   | Change host param to www.youtube-nocookie.com            |
 
 #### Tips for Resizing
 
