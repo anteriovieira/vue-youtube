@@ -77,12 +77,22 @@ export default {
         return
       }
 
+      const params = { videoId: videoId }
+
+      if (typeof this.playerVars.start === 'number') {
+        params.startSeconds = this.playerVars.start
+      }
+
+      if (typeof this.playerVars.end === 'number') {
+        params.endSeconds = this.playerVars.end
+      }
+
       if (this.playerVars.autoplay === 1) {
-        this.player.loadVideoById({ videoId })
+        this.player.loadVideoById(params)
         return
       }
 
-      this.player.cueVideoById({ videoId })
+      this.player.cueVideoById(params)
     },
     resizeProportionally () {
       this.player.getIframe().then(iframe => {
@@ -133,7 +143,7 @@ export default {
     window.YTConfig = {
       host: 'https://www.youtube.com/iframe_api'
     }
-    
+
     const host = this.nocookie ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com'
 
     this.player = player(this.$el, {

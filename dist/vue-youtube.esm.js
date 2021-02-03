@@ -1,6 +1,6 @@
 /*!
  * vue-youtube v1.4.0
- * (c) 2019 Antério Vieira
+ * (c) 2021 Antério Vieira
  * Released under the MIT License.
  */
 
@@ -136,12 +136,22 @@ var Youtube = {
         return
       }
 
+      var params = { videoId: videoId };
+
+      if (typeof this.playerVars.start === 'number') {
+        params.startSeconds = this.playerVars.start;
+      }
+
+      if (typeof this.playerVars.end === 'number') {
+        params.endSeconds = this.playerVars.end;
+      }
+
       if (this.playerVars.autoplay === 1) {
-        this.player.loadVideoById({ videoId: videoId });
+        this.player.loadVideoById(params);
         return
       }
 
-      this.player.cueVideoById({ videoId: videoId });
+      this.player.cueVideoById(params);
     },
     resizeProportionally: function resizeProportionally () {
       var this$1 = this;
