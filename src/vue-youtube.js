@@ -1,4 +1,5 @@
-const player = require('youtube-player')
+import { h } from 'vue'
+import player from 'youtube-player';
 
 const UNSTARTED = -1
 const ENDED = 0
@@ -129,7 +130,7 @@ export default {
       this.player.setSize(this.width, val)
     }
   },
-  beforeDestroy () {
+  beforeUnmount () {
     if (this.player !== null && this.player.destroy) {
       this.player.destroy()
       delete this.player
@@ -166,7 +167,7 @@ export default {
       this.resizeProportionally()
     }
   },
-  render (h) {
+  render() {
     return h('div')
   }
 }
