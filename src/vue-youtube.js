@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import player from 'youtube-player';
+import player from 'youtube-player'
 
 const UNSTARTED = -1
 const ENDED = 0
@@ -167,7 +167,7 @@ export default {
       this.resizeProportionally()
     }
   },
-  render() {
+  render () {
     return h('div')
   }
 }
