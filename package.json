@@ -44,6 +44,7 @@
   },
   "pre-commit": "lint:staged",
   "devDependencies": {
+    "@vue/compiler-sfc": "^3.1.0",
     "add-asset-html-webpack-plugin": "^2.0.0",
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.0",
@@ -90,7 +91,7 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-postcss": "^0.4.1",
     "rollup-plugin-replace": "^1.1.0",
-    "rollup-plugin-vue": "^2.3.0",
+    "rollup-plugin-vue": "^6.0.0-beta.10",
     "sinon": "2.2.0",
     "sinon-chai": "^2.10.0",
     "style-loader": "^0.17.0",
@@ -100,9 +101,8 @@
     "stylelint-processor-html": "^1.0.0",
     "uglify-js": "^3.0.0",
     "uppercamelcase": "^3.0.0",
-    "vue": "^2.3.0",
-    "vue-loader": "^12.0.0",
-    "vue-template-compiler": "^2.3.0",
+    "vue": "^3.1.0",
+    "vue-loader": "^16.0.0",
     "webpack": "^2.5.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dashboard": "^0.4.0",
@@ -111,7 +111,7 @@
     "yarn-or-npm": "^2.0.0"
   },
   "peerDependencies": {
-    "vue": "^2.3.0"
+    "vue": "^3.1.0"
   },
   "dllPlugin": {
     "name": "vuePluginTemplateDeps",

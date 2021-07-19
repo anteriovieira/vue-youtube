@@ -1,16 +1,12 @@
 import getIdFromUrl from 'get-youtube-id'
 import Youtube from './vue-youtube'
 
-function plugin (Vue) {
-  Vue.prototype.$youtube = {
+function plugin (app) {
+  app.config.globalProperties.$youtube = {
     getIdFromUrl
   }
 
-  Vue.component('youtube', Youtube)
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin)
+  app.component('youtube', Youtube)
 }
 
 export default plugin
